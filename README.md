@@ -1,4 +1,4 @@
-    <div align=center><h1><b>OOP Mini-Project</b></h1></div>
+
 <div align=center><h2><b>DSE 2123</b></h2></div>
 
 <div align=center>
