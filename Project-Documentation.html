@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Project-Documentation.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<div align=center><h1><b>OOP Mini-Project</b></h1></div>
+<div align=center><h2><b>DSE 2123</b></h2></div>
+<div align=center>
+<table>
+<thead>
+<tr>
+<th>Student Name</th>
+<th>KP Sai Praneeth</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Registration Number</td>
+<td>230968248</td>
+</tr>
+<tr>
+<td>Assignment Number</td>
+<td>IA-3</td>
+</tr>
+<tr>
+<td>Subject Code</td>
+<td>DSE2123</td>
+</tr>
+<tr>
+<td>Subject</td>
+<td>OOP with Java</td>
+</tr>
+<tr>
+<td>Marks</td>
+<td>10</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="library-management-system">Library Management System</h1>
+<h3 id="problem-statement">Problem Statement</h3>
+<h4 id="create-a-gui-library-management-system"><strong>Create a GUI Library Management System</strong></h4>
+<p>Requirements:</p>
+<ol>
+<li>User Authentication:</li>
+</ol>
+<ul>
+<li>The system should start with a login window where users enter their credentials.</li>
+<li>If the login is successful, proceed to the library management window.</li>
+</ul>
+<ol start="2">
+<li>Book Inventory Management:</li>
+</ol>
+<ul>
+<li>The application should allow users to add, edit, or delete books from the inventory.</li>
+<li>Each book should have details such as Title, Author, ISBN, and AvailabilityStatus (Available/Not Available).</li>
+</ul>
+<ol start="3">
+<li>Search and Borrowing:</li>
+</ol>
+<ul>
+<li>Include a search feature that allows users to find books by title or author.</li>
+<li>Allow users to borrow a book, which updates the availability status.</li>
+</ul>
+<h3 id="methodology">Methodology</h3>
+<ol>
+<li><strong>User Authentication</strong></li>
+</ol>
+<p>The storage of information dealt with by creating a class called <code>User</code> which stores the credentials of the user using a <code>Map</code> data structure. The authentication part is done using the <code>authenticate</code> method in the <code>LibraryManagement</code> class. This method fetched the <code>User</code> object with the username entered and compares the password with the password entered.</p>
+<p>The login page also initializes 2 users with the following credentials:</p>
+<ul>
+<li><code>user1</code>, <code>password1</code></li>
+<li><code>user2</code>, <code>password2</code></li>
+</ul>
+<p>There is a register button provided for registration of new users. However, the information created in every session is not stored on the secondary storage.</p>
+<p>The login panel takes username (<code>String</code>) and password (<code>String</code>) as an input and calls the <code>authenticate</code> method. This methods returns a boolean value. If the authentication is successful, the library panel is opened, or else a message dialog is showed saying that the credentials are invalid.</p>
+<ol start="2">
+<li><strong>Book Inventory Management</strong></li>
+</ol>
+<p>The inventory panel is initialized using the <code>createInventoryPanel</code> method in the <code>LibraryManagement</code> class. The panel consists of input fields for Title, Author, ISBN, and Status. The status is a combo box with 2 options: Available and Not Available. The Add Book button adds the book to the inventory list. The ISBN is validated using the ISBN-13 algorithm. If the ISBN is invalid, a <code>NumberFormatException</code> is thrown and caught in the inventory method.</p>
+<p>The inventory panel also consists of a <code>JList</code> to display the list of books in the inventory. The <code>DefaultListModel</code> is used to store the list of books. The <code>addButton</code> action listener adds the book to the list and clears the input fields.</p>
+<p>When a user borrows a book, the status of the book is changed to Not Available and the book is marked as borrowed by the user. The user can return the book by clicking the Return Selected Book button. The status of the book is changed to Available and the book is marked as not borrowed.</p>
+<ol start="3">
+<li><strong>Search and Borrowing</strong></li>
+</ol>
+<p>The search panel is initialized using the <code>createSearchPanel</code> method in the <code>LibraryManagement</code> class. The panel consists of a search field and a search button. The search button searches for books by title, author, or ISBN-13 number. The search results are displayed in a <code>JList</code>. The user can borrow a book by selecting the book and clicking the Borrow Selected Book button. The user can return a book by selecting the book and clicking the Return Selected Book button. Only the user who borrowed the book can return the book, if any other user tries to return the book, a message dialog is displayed saying that the user cannot return the book.</p>
+<h3 id="results-w-screenshots">Results (w/ screenshots)</h3>
+<ol>
+<li><strong>Login Panel</strong></li>
+</ol>
+<p><img src="https://cdn.discordapp.com/attachments/924702945650573352/1299720785203826708/image.png?ex=671e3ace&amp;is=671ce94e&amp;hm=e50085ab5983d3c50d26704f81c0cce2bdd27b220851f93ebfcfe3abc6a66520" alt="Login Panel"></p>
+<ol start="2">
+<li><strong>Registration Panel</strong></li>
+</ol>
+<p><img src="https://cdn.discordapp.com/attachments/924702945650573352/1299721103366946908/image.png?ex=671e3b1a&amp;is=671ce99a&amp;hm=6bb2075e2c600fbc1fccbc1208554bab045511ffa74b25ddfb12359101a36b8d&amp;" alt="Registration Panel"></p>
+<ol start="3">
+<li><strong>Library Panel with Inventory Panel</strong></li>
+</ol>
+<p><img src="https://cdn.discordapp.com/attachments/924702945650573352/1299721335412363264/image.png?ex=671e3b52&amp;is=671ce9d2&amp;hm=c252df3a9a03ff5b11e0e99988158dff6874b5a86589185eb2076589434b92da&amp;" alt="Library Panel"></p>
+<ol start="4">
+<li><strong>Search Panel</strong></li>
+</ol>
+<p><img src="https://cdn.discordapp.com/attachments/924702945650573352/1299721655509188660/image.png?ex=671e3b9e&amp;is=671cea1e&amp;hm=d6bc9d257721e1b34df19811967ea5ac343bdbbbf4b0286807ccf50a145556b5&amp;" alt="Search Panel"></p>
+<ol start="5">
+<li><strong>Book Borrowing</strong></li>
+</ol>
+<p><img src="https://cdn.discordapp.com/attachments/924702945650573352/1299721895561793646/image.png?ex=671e3bd7&amp;is=671cea57&amp;hm=6261bef15f5282db2cccc3604f1624e267a8be1cfd18c42296f756449e6e911e&amp;" alt="Book Borrowing"></p>
+<ol start="6">
+<li><strong>Search Panel after borrowing</strong></li>
+</ol>
+<p><img src="https://cdn.discordapp.com/attachments/924702945650573352/1299722044690141304/image.png?ex=671e3bfb&amp;is=671cea7b&amp;hm=ddff05c6a4a093693ce47955cc330e4689570d015c357c440a5f1cc5a629f2a4&amp;" alt="Search Panel after borrowing"></p>
+<ol start="7">
+<li><strong>Book Returning</strong></li>
+</ol>
+<p><img src="https://cdn.discordapp.com/attachments/924702945650573352/1299722473314717696/image.png?ex=671e3c61&amp;is=671ceae1&amp;hm=2111340033c2b5635c76b6ffa313819eb194b9c20210fac91e90161b20198043&amp;" alt="Book Returning"></p>
+<ol start="8">
+<li><strong>Adding a Book with wrong ISBN number</strong></li>
+</ol>
+<p><img src="https://cdn.discordapp.com/attachments/924702945650573352/1299723564332879872/image.png?ex=671e3d65&amp;is=671cebe5&amp;hm=d02da128ea4da0f42829998abd08cb8352ef1f356086935ac346fa7f1c2a4472&amp;" alt="Wrong ISBN"></p>
+<ol start="9">
+<li><strong>Adding a Book with correct ISBN number</strong></li>
+</ol>
+<p><img src="https://cdn.discordapp.com/attachments/924702945650573352/1299723873461342208/image.png?ex=671e3daf&amp;is=671cec2f&amp;hm=5710979438e0741e7031a911cea4a2f501c527bed97bba4600b573fc1747d797&amp;" alt="Correct ISBN"></p>
+<p>10.; <strong>Borrowing a book that is not available</strong></p>
+<p><img src="https://cdn.discordapp.com/attachments/924702945650573352/1299724176520908821/image.png?ex=671e3df7&amp;is=671cec77&amp;hm=6713f4ab63dbabbde14f2c031f63ac7cb005c8554024c36ec6ab5973b9aea69b&amp;" alt="Not Available"></p>
+<h3 id="the-code">The Code</h3>
+<p><code>LibraryManagement.java</code></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">package</span> src;
+
+<span class="hljs-keyword">import</span> javax.swing.*;
+<span class="hljs-keyword">import</span> java.awt.*;
+<span class="hljs-keyword">import</span> java.util.ArrayList;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.List;
+<span class="hljs-keyword">import</span> java.util.Map;
+<span class="hljs-keyword">import</span> java.lang.NumberFormatException;
+
+<span class="hljs-comment">// Main class for the Library Management System</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LibraryManagement</span> </span>{
+    <span class="hljs-keyword">private</span> JFrame mainFrame; <span class="hljs-comment">// Main application window</span>
+    <span class="hljs-keyword">private</span> JPanel currentPanel; <span class="hljs-comment">// Current panel being displayed</span>
+    <span class="hljs-keyword">private</span> List&lt;Book&gt; books; <span class="hljs-comment">// List of books in the library</span>
+    <span class="hljs-keyword">private</span> Map&lt;String, User&gt; users; <span class="hljs-comment">// Map of users with their credentials</span>
+    <span class="hljs-keyword">private</span> User currentUser; <span class="hljs-comment">// Currently logged-in user</span>
+
+    <span class="hljs-keyword">private</span> DefaultListModel&lt;Book&gt; listModel = <span class="hljs-keyword">new</span> DefaultListModel&lt;&gt;(); <span class="hljs-comment">// List model for the book list</span>
+    <span class="hljs-keyword">private</span> JList&lt;Book&gt; bookList = <span class="hljs-keyword">new</span> JList&lt;&gt;(listModel); <span class="hljs-comment">// JList to display the book list</span>
+
+    <span class="hljs-comment">// Constructor to initialize the library management system</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LibraryManagement</span><span class="hljs-params">()</span> </span>{
+        books = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+        users = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
+        initializeUsers(); <span class="hljs-comment">// Initialize default users</span>
+        initializeGUI(); <span class="hljs-comment">// Initialize the graphical user interface</span>
+    }
+
+    <span class="hljs-comment">// Method to initialize default users</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">initializeUsers</span><span class="hljs-params">()</span> </span>{
+        users.put(<span class="hljs-string">"user1"</span>, <span class="hljs-keyword">new</span> User(<span class="hljs-string">"user1"</span>, <span class="hljs-string">"password1"</span>));
+        users.put(<span class="hljs-string">"user2"</span>, <span class="hljs-keyword">new</span> User(<span class="hljs-string">"user2"</span>, <span class="hljs-string">"password2"</span>));
+    }
+
+    <span class="hljs-comment">// Method to initialize the graphical user interface</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">initializeGUI</span><span class="hljs-params">()</span> </span>{
+        mainFrame = <span class="hljs-keyword">new</span> JFrame(<span class="hljs-string">"Library Management System"</span>);
+        mainFrame.setSize(<span class="hljs-number">1200</span>, <span class="hljs-number">800</span>);
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        showLoginPanel(); <span class="hljs-comment">// Show the login panel initially</span>
+        mainFrame.setVisible(<span class="hljs-keyword">true</span>);
+    }
+
+    <span class="hljs-comment">// Method to display the login panel</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">showLoginPanel</span><span class="hljs-params">()</span> </span>{
+        JPanel loginPanel = <span class="hljs-keyword">new</span> JPanel(<span class="hljs-keyword">new</span> GridBagLayout());
+        GridBagConstraints gbc = <span class="hljs-keyword">new</span> GridBagConstraints();
+        gbc.insets = <span class="hljs-keyword">new</span> Insets(<span class="hljs-number">5</span>, <span class="hljs-number">5</span>, <span class="hljs-number">5</span>, <span class="hljs-number">5</span>);
+
+        JLabel userLabel = <span class="hljs-keyword">new</span> JLabel(<span class="hljs-string">"Username:"</span>);
+        JLabel passLabel = <span class="hljs-keyword">new</span> JLabel(<span class="hljs-string">"Password:"</span>);
+        JTextField userField = <span class="hljs-keyword">new</span> JTextField(<span class="hljs-number">15</span>);
+        JPasswordField passField = <span class="hljs-keyword">new</span> JPasswordField(<span class="hljs-number">15</span>);
+        JButton loginButton = <span class="hljs-keyword">new</span> JButton(<span class="hljs-string">"Login"</span>);
+        JButton registerButton = <span class="hljs-keyword">new</span> JButton(<span class="hljs-string">"Register"</span>);
+
+        <span class="hljs-comment">// Action listener for the login button</span>
+        loginButton.addActionListener(e -&gt; {
+            String username = userField.getText();
+            String password = <span class="hljs-keyword">new</span> String(passField.getPassword());
+            <span class="hljs-keyword">if</span> (authenticate(username, password)) { <span class="hljs-comment">// Authenticate user</span>
+                currentUser = users.get(username);
+                showLibraryPanel(); <span class="hljs-comment">// Show library panel on successful login</span>
+            } <span class="hljs-keyword">else</span> {
+                JOptionPane.showMessageDialog(mainFrame, <span class="hljs-string">"Invalid credentials"</span>, <span class="hljs-string">"Login Failed"</span>, JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        <span class="hljs-comment">// Action listener for the register button</span>
+        registerButton.addActionListener(e -&gt; showRegistrationPanel());
+
+        <span class="hljs-comment">// Adding components to the login panel</span>
+        gbc.gridx = <span class="hljs-number">0</span>;
+        gbc.gridy = <span class="hljs-number">0</span>;
+        loginPanel.add(userLabel, gbc);
+
+        gbc.gridx = <span class="hljs-number">1</span>;
+        loginPanel.add(userField, gbc);
+
+        gbc.gridx = <span class="hljs-number">0</span>;
+        gbc.gridy = <span class="hljs-number">1</span>;
+        loginPanel.add(passLabel, gbc);
+
+        gbc.gridx = <span class="hljs-number">1</span>;
+        loginPanel.add(passField, gbc);
+
+        gbc.gridx = <span class="hljs-number">0</span>;
+        gbc.gridy = <span class="hljs-number">2</span>;
+        gbc.gridwidth = <span class="hljs-number">2</span>;
+        loginPanel.add(loginButton, gbc);
+
+        gbc.gridy = <span class="hljs-number">3</span>;
+        loginPanel.add(registerButton, gbc);
+
+        setCurrentPanel(loginPanel); <span class="hljs-comment">// Set the current panel to login panel</span>
+    }
+
+    <span class="hljs-comment">// Method to display the registration panel</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">showRegistrationPanel</span><span class="hljs-params">()</span> </span>{
+        JPanel registerPanel = <span class="hljs-keyword">new</span> JPanel(<span class="hljs-keyword">new</span> GridBagLayout());
+        GridBagConstraints gbc = <span class="hljs-keyword">new</span> GridBagConstraints();
+        gbc.insets = <span class="hljs-keyword">new</span> Insets(<span class="hljs-number">5</span>, <span class="hljs-number">5</span>, <span class="hljs-number">5</span>, <span class="hljs-number">5</span>);
+
+        JLabel userLabel = <span class="hljs-keyword">new</span> JLabel(<span class="hljs-string">"Username:"</span>);
+        JLabel passLabel = <span class="hljs-keyword">new</span> JLabel(<span class="hljs-string">"Password:"</span>);
+        JTextField userField = <span class="hljs-keyword">new</span> JTextField(<span class="hljs-number">15</span>);
+        JPasswordField passField = <span class="hljs-keyword">new</span> JPasswordField(<span class="hljs-number">15</span>);
+        JButton registerButton = <span class="hljs-keyword">new</span> JButton(<span class="hljs-string">"Register"</span>);
+
+        <span class="hljs-comment">// Action listener for the register button</span>
+        registerButton.addActionListener(e -&gt; {
+            String username = userField.getText();
+            String password = <span class="hljs-keyword">new</span> String(passField.getPassword());
+            <span class="hljs-keyword">if</span> (users.containsKey(username)) {
+                JOptionPane.showMessageDialog(mainFrame, <span class="hljs-string">"Username already exists"</span>, <span class="hljs-string">"Registration Failed"</span>, JOptionPane.ERROR_MESSAGE);
+            } <span class="hljs-keyword">else</span> {
+                users.put(username, <span class="hljs-keyword">new</span> User(username, password));
+                JOptionPane.showMessageDialog(mainFrame, <span class="hljs-string">"Registration successful"</span>, <span class="hljs-string">"Registration"</span>, JOptionPane.INFORMATION_MESSAGE);
+                showLoginPanel(); <span class="hljs-comment">// Show login panel after successful registration</span>
+            }
+        });
+
+        <span class="hljs-comment">// Adding components to the registration panel</span>
+        gbc.gridx = <span class="hljs-number">0</span>;
+        gbc.gridy = <span class="hljs-number">0</span>;
+        registerPanel.add(userLabel, gbc);
+
+        gbc.gridx = <span class="hljs-number">1</span>;
+        registerPanel.add(userField, gbc);
+
+        gbc.gridx = <span class="hljs-number">0</span>;
+        gbc.gridy = <span class="hljs-number">1</span>;
+        registerPanel.add(passLabel, gbc);
+
+        gbc.gridx = <span class="hljs-number">1</span>;
+        registerPanel.add(passField, gbc);
+
+        gbc.gridx = <span class="hljs-number">0</span>;
+        gbc.gridy = <span class="hljs-number">2</span>;
+        gbc.gridwidth = <span class="hljs-number">2</span>;
+        registerPanel.add(registerButton, gbc);
+
+        setCurrentPanel(registerPanel); <span class="hljs-comment">// Set the current panel to registration panel</span>
+    }
+
+    <span class="hljs-comment">// Method to authenticate user credentials</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">authenticate</span><span class="hljs-params">(String username, String password)</span> </span>{
+        User user = users.get(username);
+        <span class="hljs-keyword">return</span> user != <span class="hljs-keyword">null</span> &amp;&amp; user.getPassword().equals(password);
+    }
+
+    <span class="hljs-comment">// Method to display the library panel</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">showLibraryPanel</span><span class="hljs-params">()</span> </span>{
+        JPanel libraryPanel = <span class="hljs-keyword">new</span> JPanel(<span class="hljs-keyword">new</span> BorderLayout());
+        
+        JTabbedPane tabbedPane = <span class="hljs-keyword">new</span> JTabbedPane();
+        tabbedPane.addTab(<span class="hljs-string">"Inventory"</span>, createInventoryPanel()); <span class="hljs-comment">// Tab for inventory management</span>
+        tabbedPane.addTab(<span class="hljs-string">"Search"</span>, createSearchPanel()); <span class="hljs-comment">// Tab for searching books</span>
+
+        JButton logoutButton = <span class="hljs-keyword">new</span> JButton(<span class="hljs-string">"Logout"</span>);
+        logoutButton.addActionListener(e -&gt; {
+            currentUser = <span class="hljs-keyword">null</span>;
+            showLoginPanel(); <span class="hljs-comment">// Show login panel on logout</span>
+        });
+
+        JPanel topPanel = <span class="hljs-keyword">new</span> JPanel(<span class="hljs-keyword">new</span> BorderLayout());
+        topPanel.add(<span class="hljs-keyword">new</span> JLabel(<span class="hljs-string">"Welcome, "</span> + currentUser.getUsername()), BorderLayout.WEST);
+        topPanel.add(logoutButton, BorderLayout.EAST);
+
+        libraryPanel.add(topPanel, BorderLayout.NORTH);
+        libraryPanel.add(tabbedPane, BorderLayout.CENTER);
+
+        setCurrentPanel(libraryPanel); <span class="hljs-comment">// Set the current panel to library panel</span>
+    }
+
+    <span class="hljs-comment">// Method to create the inventory panel</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> JPanel <span class="hljs-title">createInventoryPanel</span><span class="hljs-params">()</span> </span>{
+        JPanel panel = <span class="hljs-keyword">new</span> JPanel(<span class="hljs-keyword">new</span> BorderLayout());
+
+        JPanel inputPanel = <span class="hljs-keyword">new</span> JPanel(<span class="hljs-keyword">new</span> GridLayout(<span class="hljs-number">5</span>, <span class="hljs-number">2</span>));
+        JTextField titleField = <span class="hljs-keyword">new</span> JTextField();
+        JTextField authorField = <span class="hljs-keyword">new</span> JTextField();
+        JTextField isbnField = <span class="hljs-keyword">new</span> JTextField();
+        JComboBox&lt;String&gt; statusCombo = <span class="hljs-keyword">new</span> JComboBox&lt;&gt;(<span class="hljs-keyword">new</span> String[]{<span class="hljs-string">"Available"</span>, <span class="hljs-string">"Not Available"</span>});
+        JButton addButton = <span class="hljs-keyword">new</span> JButton(<span class="hljs-string">"Add Book"</span>);
+
+        <span class="hljs-comment">// Adding components to the input panel</span>
+        inputPanel.add(<span class="hljs-keyword">new</span> JLabel(<span class="hljs-string">"Title:"</span>));
+        inputPanel.add(titleField);
+        inputPanel.add(<span class="hljs-keyword">new</span> JLabel(<span class="hljs-string">"Author:"</span>));
+        inputPanel.add(authorField);
+        inputPanel.add(<span class="hljs-keyword">new</span> JLabel(<span class="hljs-string">"ISBN-13 (numeric only):"</span>));
+        inputPanel.add(isbnField);
+        inputPanel.add(<span class="hljs-keyword">new</span> JLabel(<span class="hljs-string">"Status:"</span>));
+        inputPanel.add(statusCombo);
+        inputPanel.add(<span class="hljs-keyword">new</span> JLabel());
+        inputPanel.add(addButton);
+
+        JScrollPane scrollPane = <span class="hljs-keyword">new</span> JScrollPane(bookList);
+        
+        <span class="hljs-comment">// Action listener for the add button</span>
+        addButton.addActionListener(e -&gt; {
+            <span class="hljs-keyword">try</span> {
+                <span class="hljs-keyword">long</span> isbn = Long.parseLong(isbnField.getText());
+                Book book = <span class="hljs-keyword">new</span> Book(titleField.getText(), authorField.getText(), isbn, statusCombo.getSelectedItem().toString());
+                books.add(book);
+                listModel.addElement(book);
+                clearFields(titleField, authorField, isbnField); <span class="hljs-comment">// Clear input fields after adding book</span>
+            } <span class="hljs-keyword">catch</span> (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(mainFrame, <span class="hljs-string">"Please enter a valid ISBN-13"</span>, <span class="hljs-string">"Invalid Input"</span>, JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        panel.add(inputPanel, BorderLayout.NORTH);
+        panel.add(scrollPane, BorderLayout.CENTER);
+
+        <span class="hljs-keyword">return</span> panel;
+    }
+
+    <span class="hljs-comment">// Method to create the search panel</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> JPanel <span class="hljs-title">createSearchPanel</span><span class="hljs-params">()</span> </span>{
+        JPanel panel = <span class="hljs-keyword">new</span> JPanel(<span class="hljs-keyword">new</span> BorderLayout());
+
+        JPanel searchPanel = <span class="hljs-keyword">new</span> JPanel(<span class="hljs-keyword">new</span> FlowLayout());
+        JTextField searchField = <span class="hljs-keyword">new</span> JTextField(<span class="hljs-number">20</span>);
+        JButton searchButton = <span class="hljs-keyword">new</span> JButton(<span class="hljs-string">"Search"</span>);
+        searchPanel.add(searchField);
+        searchPanel.add(searchButton);
+
+        DefaultListModel&lt;Book&gt; listModel = <span class="hljs-keyword">new</span> DefaultListModel&lt;&gt;();
+        JList&lt;Book&gt; resultList = <span class="hljs-keyword">new</span> JList&lt;&gt;(listModel);
+        JScrollPane scrollPane = <span class="hljs-keyword">new</span> JScrollPane(resultList);
+
+        <span class="hljs-comment">// Action listener for the search button</span>
+        searchButton.addActionListener(e -&gt; {
+            String query = searchField.getText().toLowerCase();
+            listModel.clear();
+            <span class="hljs-keyword">for</span> (Book book : books) {
+                <span class="hljs-keyword">if</span> (book.getTitle().toLowerCase().contains(query) || 
+                    book.getAuthor().toLowerCase().contains(query) ||
+                    String.valueOf(book.getIsbn()).contains(query)) {
+                    listModel.addElement(book);
+                }
+            }
+        });
+
+        JPanel buttonPanel = <span class="hljs-keyword">new</span> JPanel(<span class="hljs-keyword">new</span> FlowLayout());
+        JButton borrowButton = <span class="hljs-keyword">new</span> JButton(<span class="hljs-string">"Borrow Selected Book"</span>);
+        JButton returnButton = <span class="hljs-keyword">new</span> JButton(<span class="hljs-string">"Return Selected Book"</span>);
+        buttonPanel.add(borrowButton);
+        buttonPanel.add(returnButton);
+
+        <span class="hljs-comment">// Action listener for the borrow button</span>
+        borrowButton.addActionListener(e -&gt; {
+            Book selectedBook = resultList.getSelectedValue();
+            <span class="hljs-keyword">if</span> (selectedBook != <span class="hljs-keyword">null</span>) {
+                <span class="hljs-keyword">if</span> (<span class="hljs-string">"Available"</span>.equals(selectedBook.getStatus())) {
+                    selectedBook.setStatus(<span class="hljs-string">"Not Available"</span>);
+                    selectedBook.setBorrowedBy(currentUser.getUsername());
+                    JOptionPane.showMessageDialog(mainFrame, <span class="hljs-string">"Book borrowed successfully!"</span>);
+                } <span class="hljs-keyword">else</span> {
+                    JOptionPane.showMessageDialog(mainFrame, <span class="hljs-string">"Book is not available for borrowing."</span>);
+                }
+                resultList.repaint();
+            }
+        });
+
+        <span class="hljs-comment">// Action listener for the return button</span>
+        returnButton.addActionListener(e -&gt; {
+            Book selectedBook = resultList.getSelectedValue();
+            <span class="hljs-keyword">if</span> (selectedBook != <span class="hljs-keyword">null</span>) {
+                <span class="hljs-keyword">if</span> (<span class="hljs-string">"Not Available"</span>.equals(selectedBook.getStatus()) &amp;&amp; 
+                    currentUser.getUsername().equals(selectedBook.getBorrowedBy())) {
+                    selectedBook.setStatus(<span class="hljs-string">"Available"</span>);
+                    selectedBook.setBorrowedBy(<span class="hljs-keyword">null</span>);
+                    JOptionPane.showMessageDialog(mainFrame, <span class="hljs-string">"Book returned successfully!"</span>);
+                } <span class="hljs-keyword">else</span> {
+                    JOptionPane.showMessageDialog(mainFrame, <span class="hljs-string">"You cannot return this book."</span>);
+                }
+                resultList.repaint();
+            }
+        });
+
+        panel.add(searchPanel, BorderLayout.NORTH);
+        panel.add(scrollPane, BorderLayout.CENTER);
+        panel.add(buttonPanel, BorderLayout.SOUTH);
+
+        <span class="hljs-keyword">return</span> panel;
+    }
+
+    <span class="hljs-comment">// Method to set the current panel being displayed</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setCurrentPanel</span><span class="hljs-params">(JPanel panel)</span> </span>{
+        <span class="hljs-keyword">if</span> (currentPanel != <span class="hljs-keyword">null</span>) {
+            mainFrame.remove(currentPanel);
+        }
+        currentPanel = panel;
+        mainFrame.add(currentPanel);
+        mainFrame.revalidate();
+        mainFrame.repaint();
+    }
+
+    <span class="hljs-comment">// Method to clear input fields</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">clearFields</span><span class="hljs-params">(JTextField... fields)</span> </span>{
+        <span class="hljs-keyword">for</span> (JTextField field : fields) {
+            field.setText(<span class="hljs-string">""</span>);
+        }
+    }
+
+    <span class="hljs-comment">// Method to add books to the library while initializing</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">initBooks</span><span class="hljs-params">()</span> </span>{
+        books.add(<span class="hljs-keyword">new</span> Book(<span class="hljs-string">"The Great Gatsby"</span>, <span class="hljs-string">"F. Scott Fitzgerald"</span>, <span class="hljs-number">9780743273565L</span>, <span class="hljs-string">"Available"</span>));
+        books.add(<span class="hljs-keyword">new</span> Book(<span class="hljs-string">"To Kill a Mockingbird"</span>, <span class="hljs-string">"Harper Lee"</span>, <span class="hljs-number">9780061120084L</span>, <span class="hljs-string">"Available"</span>));
+        books.add(<span class="hljs-keyword">new</span> Book(<span class="hljs-string">"1984"</span>, <span class="hljs-string">"George Orwell"</span>, <span class="hljs-number">9780451524935L</span>, <span class="hljs-string">"Available"</span>));
+        books.add(<span class="hljs-keyword">new</span> Book(<span class="hljs-string">"Pride and Prejudice"</span>, <span class="hljs-string">"Jane Austen"</span>, <span class="hljs-number">9780679783268L</span>, <span class="hljs-string">"Available"</span>));
+        books.add(<span class="hljs-keyword">new</span> Book(<span class="hljs-string">"The Catcher in the Rye"</span>, <span class="hljs-string">"J.D. Salinger"</span>, <span class="hljs-number">9780316769488L</span>, <span class="hljs-string">"Available"</span>));
+        books.add(<span class="hljs-keyword">new</span> Book(<span class="hljs-string">"The Hobbit"</span>, <span class="hljs-string">"J.R.R. Tolkien"</span>, <span class="hljs-number">9780345534835L</span>, <span class="hljs-string">"Available"</span>));
+        books.add(<span class="hljs-keyword">new</span> Book(<span class="hljs-string">"The Lord of the Rings"</span>, <span class="hljs-string">"J.R.R. Tolkien"</span>, <span class="hljs-number">9780544003415L</span>, <span class="hljs-string">"Available"</span>));
+        books.add(<span class="hljs-keyword">new</span> Book(<span class="hljs-string">"Animal Farm"</span>, <span class="hljs-string">"George Orwell"</span>, <span class="hljs-number">9780451526342L</span>, <span class="hljs-string">"Available"</span>));
+        books.add(<span class="hljs-keyword">new</span> Book(<span class="hljs-string">"Brave New World"</span>, <span class="hljs-string">"Aldous Huxley"</span>, <span class="hljs-number">9780060850524L</span>, <span class="hljs-string">"Available"</span>));
+        books.add(<span class="hljs-keyword">new</span> Book(<span class="hljs-string">"The Grapes of Wrath"</span>, <span class="hljs-string">"John Steinbeck"</span>, <span class="hljs-number">9780143039433L</span>, <span class="hljs-string">"Available"</span>));
+        listModel.addAll(books);
+    }
+}
+</div></code></pre>
+<p><code>Book.java</code></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">package</span> src;
+
+<span class="hljs-keyword">import</span> java.lang.NumberFormatException;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Book</span> </span>{
+    <span class="hljs-keyword">private</span> String title;
+    <span class="hljs-keyword">private</span> String author;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">long</span> isbn;
+    <span class="hljs-keyword">private</span> String status;
+    <span class="hljs-keyword">private</span> String borrowedBy;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Book</span><span class="hljs-params">(String title, String author, <span class="hljs-keyword">long</span> isbn, String status)</span> <span class="hljs-keyword">throws</span> NumberFormatException </span>{
+        <span class="hljs-comment">// Validate the ISBN number to the ISBN-13 algorithm</span>
+        <span class="hljs-keyword">if</span> (validISBN(isbn)) {
+            <span class="hljs-keyword">this</span>.title = title;
+            <span class="hljs-keyword">this</span>.author = author;
+            <span class="hljs-keyword">this</span>.isbn = isbn;
+            <span class="hljs-keyword">this</span>.status = status;
+            <span class="hljs-keyword">this</span>.borrowedBy = <span class="hljs-keyword">null</span>;
+        } <span class="hljs-keyword">else</span> {
+            System.out.println(<span class="hljs-string">"Invalid ISBN: "</span> + isbn);
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NumberFormatException(); <span class="hljs-comment">// Throws NumberFormatException which is caught in the inventory method</span>
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getTitle</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> title; }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getAuthor</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> author; }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">long</span> <span class="hljs-title">getIsbn</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> isbn; }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getStatus</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> status; }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setStatus</span><span class="hljs-params">(String status)</span> </span>{ <span class="hljs-keyword">this</span>.status = status; }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getBorrowedBy</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> borrowedBy; }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setBorrowedBy</span><span class="hljs-params">(String borrowedBy)</span> </span>{ <span class="hljs-keyword">this</span>.borrowedBy = borrowedBy; }
+
+    <span class="hljs-comment">// Return a string with book details for display</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> title + <span class="hljs-string">" by "</span> + author + <span class="hljs-string">" (ISBN-13: "</span> + isbn + <span class="hljs-string">") - "</span> + status +
+               (borrowedBy != <span class="hljs-keyword">null</span> ? <span class="hljs-string">" (Borrowed by: "</span> + borrowedBy + <span class="hljs-string">")"</span> : <span class="hljs-string">""</span>); 
+    }
+
+    <span class="hljs-comment">// Method to validate the ISBN-13 number</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">validISBN</span><span class="hljs-params">(<span class="hljs-keyword">long</span> isbn)</span> </span>{
+        <span class="hljs-keyword">int</span> last = (<span class="hljs-keyword">int</span>) (isbn % <span class="hljs-number">10</span>);
+        isbn /= <span class="hljs-number">10</span>;
+        <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">12</span>; i++) {
+            <span class="hljs-keyword">int</span> digit = (<span class="hljs-keyword">int</span>) (isbn % <span class="hljs-number">10</span>);
+            sum += (i % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>) ? digit : digit * <span class="hljs-number">3</span>;
+            isbn /= <span class="hljs-number">10</span>;
+        }
+        <span class="hljs-keyword">int</span> check = <span class="hljs-number">10</span> - (sum % <span class="hljs-number">10</span>);
+        <span class="hljs-keyword">if</span> (check == <span class="hljs-number">10</span>) check = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">return</span> check == last;
+    }
+}
+</div></code></pre>
+<p><code>User.java</code></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">package</span> src;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>{
+    <span class="hljs-keyword">private</span> String username; <span class="hljs-comment">// Username of the user, displayed on the top-right corner</span>
+    <span class="hljs-keyword">private</span> String password; <span class="hljs-comment">// Password of the user</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">User</span><span class="hljs-params">(String username, String password)</span> </span>{
+        <span class="hljs-keyword">this</span>.username = username;
+        <span class="hljs-keyword">this</span>.password = password;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getUsername</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> username; } <span class="hljs-comment">// Return username for display and/or authentication</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getPassword</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> password; } <span class="hljs-comment">// Return password for authentication</span>
+}
+</div></code></pre>
+<p><code>App.java</code></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">package</span> src;
+
+<span class="hljs-keyword">import</span> javax.swing.SwingUtilities;
+
+<span class="hljs-comment">// Main class used for running the application</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+        SwingUtilities.invokeLater(() -&gt; {
+            <span class="hljs-keyword">new</span> LibraryManagement().initBooks(); <span class="hljs-comment">// Start the GUI while initialising the library with some books</span>
+        });
+    }
+}
+</div></code></pre>
+<h3 id="references">References</h3>
+<ol>
+<li><a href="https://en.wikipedia.org/wiki/International_Standard_Book_Number#ISBN-13_check_digit_calculation">ISBN-13 Algorithm</a></li>
+<li><a href="https://docs.oracle.com/javase/tutorial/uiswing/">Java Swing Tutorial</a></li>
+<li><a href="https://docs.oracle.com/en/java/">Java Documentation</a></li>
+<li><a href="https://stackoverflow.com/">Stack Overflow</a> (for debugging and problem-solving)</li>
+<li><a href="https://www.coursera.org/learn/writing-java-code-for-applications">Coursera Swing course</a></li>
+<li><a href="https://youtu.be/Kmgo00avvEw?si=td_P3jRDIzPXK7-7">Quick references for Swing on YouTube</a></li>
+</ol>
+
+</body>
+</html>
